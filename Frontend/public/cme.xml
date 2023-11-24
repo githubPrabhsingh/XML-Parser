@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StateMachine>
+    <State name="New" class="NewTransactionAction" endState="false">
+
+        <Condition assetClass="Currency,Debt Security,Equity,Investment Programs,Physical,Specialized Account Program" transactionType="Deposit,Withdrawal,Amendment" wireType="Online,Offline,MatchOnly" initiatedBy="external" transactionMode="Individual,Batch" userAction="UC4Reject" nextState="Rejected"/>
+        <Condition assetClass="Physical" transactionType="Deposit,Withdrawal" wireType="Offline" initiatedBy="fileupload" transactionMode="Individual,Batch" validate="true" validationType="Fast" validationResult="true" nextState="Validation Passed"/>
+        <Condition assetClass="Physical/cachefrom-ui" transactionType="Deposit,Withdrawal" wireType="Offline" initiatedBy="fileupload" transactionMode="Individual" validate="true" validationType="Fast" validationResult="false" nextState="Validation Failed"/>
+
+    </State>
+
+    <State name="Validation Failed" class="ValidationFaliedTransactionAction" endState="false">
+        <Condition assetClass="Currency,Debt Security,Equity,Investment Programs,Physical,Specialized Account Program" transactionType="Deposit,Withdrawal,Amendment" wireType="Online,Offline,MatchOnly" initiatedBy="user,system" transactionMode="Individual,Batch" validationType="Fast"  validate="true" validationResult="true" nextState="Validation Passed"/>
+        <Condition assetClass="Currency,Debt Security,Equity,Investment Programs,Physical,Specialized Account Program" transactionType="Deposit,Withdrawal,Amendment" wireType="Online,Offline,MatchOnly" initiatedBy="user" transactionMode="Individual" validationType="Fast"  validate="true" validationResult="false" nextState="Validation Failed"/>
+        
+    </State>
+
+    <State name="Validation Passed" class="ValidationPassedTransactionAction" endState="false">
+        <Condition assetClass="Currency,Debt Security,Equity,Investment Programs,Physical,Specialized Account Program" transactionType="Deposit,Withdrawal,Amendment" wireType="Online,Offline,MatchOnly" initiatedBy="user,system" transactionMode="Individual,Batch" validationType="Fast"  validate="true" validationResult="true" nextState="Validation Passed"/>
+        <Condition assetClass="Currency,Debt Security,Equity,Investment Programs,Physical,Specialized Account Program" transactionType="Deposit,Withdrawal,Amendment" wireType="Online,Offline,MatchOnly" initiatedBy="user" transactionMode="Individual" validationType="Fast"  validate="true" validationResult="false" nextState="Validation Failed"/>
+    </State>
+    
+    <State name="Rejected" class="RejectedTransactionAction" endState="true"/>
+    <State name="Completed" class="CompletedTransactionAction" endState="true"/>
+</StateMachine>

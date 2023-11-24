@@ -1,0 +1,30 @@
+/* App.css */
+
+
+body {
+  margin: 0;
+  background-color: #FAF9F6; 
+}
+
+.app-container {
+
+  background-color: white;
+  text-align: left;
+  margin: 20px;
+}
+
+.app-title {
+  margin: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.xml-file-reader-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(123, 219, 236);
+}
